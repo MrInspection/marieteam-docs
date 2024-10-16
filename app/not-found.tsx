@@ -1,19 +1,25 @@
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import {cn} from "@/lib/utils";
 
 export default function NotFound() {
   return (
-    <div className="min-h-[87vh] px-2 sm:py-28 py-36 flex flex-col gap-4 items-center">
-      <div className="text-center flex flex-col items-center justify-center w-fit gap-2">
-        <h2 className="text-7xl font-bold pr-1">404</h2>
-        <p className="text-muted-foreground text-md font-medium">
-          Page not found {":("}
-        </p>
-        <p>Oops! The page you&apos;re looking for doesn&apos;t exist.</p>
-      </div>
-      <Link href="/" className={buttonVariants({})}>
-        Back to homepage
-      </Link>
-    </div>
+      <main className="flex-grow flex items-center justify-center h-screen ">
+          <div className="container mx-auto px-4">
+              <div className="max-w-md mx-auto text-center">
+                  <div className="text-sm mb-4">404</div>
+                  <h3 className="text-3xl md:text-4xl font-extrabold mb-4">
+                      Page Not Found
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                      Sorry, we couldn&apos;t find the page you&apos;re looking for.
+                      This is perhaps a temporary issue, so please try again later.
+                  </p>
+                  <Link href="/" className={cn(buttonVariants())}>
+                      Go back home
+                  </Link>
+              </div>
+          </div>
+      </main>
   );
 }

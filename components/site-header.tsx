@@ -1,5 +1,5 @@
 import { ModeToggle } from "@/components/theme-toggle";
-import {GithubIcon, TwitterIcon, CommandIcon, Aperture} from "lucide-react";
+import {Aperture} from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import SearchBar from "./search-bar";
@@ -13,10 +13,6 @@ export const NAVLINKS = [
   {
     title: "Docs",
     href: `/docs${page_routes[0].href}`,
-  },
-  {
-    title: "Blog",
-    href: "/blog",
   },
   {
     title: "MarieTeam",
