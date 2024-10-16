@@ -1,0 +1,120 @@
+---
+title: Startup Logic
+description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+---
+
+## Overview
+
+Welcome to the getSession guide. Here, you'll find all the information you need to get started.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut metus ligula. Proin vehicula velit quis justo facilisis, in facilisis dolor interdum.
+
+```java
+package fr.projectultron.avengardsmp.commands;
+
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Sound;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class GamemodeCommands implements CommandExecutor {
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (label.equalsIgnoreCase("gm") && sender instanceof Player) {
+            Player p = (Player) sender;
+            if (!p.hasPermission("avengard.admin")) {
+                p.sendMessage("§4 ■ §cYou lack the divine authority to wield such power.");
+                p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 100f, 0.5f);
+                return false;
+            }
+
+            if (args.length == 0) {
+                p.sendMessage("§4 ■ §cMissing arguments, please provide one of the following gamemodes: §4survival§c, §4creative§c, §4adventure§c, §4spectator§c.");
+                p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 100f, 0.5f);
+                return false;
+            }
+
+            if (args.length == 1) {
+                setGamemode(args[0], p);
+                return true;
+            }
+
+            if (args.length == 2) {
+                String targetUsername = args[1];
+                Player target = Bukkit.getPlayerExact(targetUsername);
+                if (target != null) {
+                    setGamemode(args[0], target);
+                    String GamemodeName = getGamemodeName(args[0]);
+                    p.sendMessage("§8 ■ §e" + target.getName() + "§7 is now in §f§l" + GamemodeName + "§7 mode.");
+                } else {
+                    p.sendMessage("§4 ■ §cPlayer not found.");
+                    p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 100f, 0.5f);
+                }
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    private void setGamemode(String mode, Player p) {
+        switch (mode.toLowerCase()) {
+            case "survival":
+            case "s":
+            case "0":
+                p.setGameMode(GameMode.SURVIVAL);
+                p.sendMessage("§8 ■ §7You are now in §f§lSURVIVAL§7 mode.");
+                break;
+            case "creative":
+            case "c":
+            case "1":
+                p.setGameMode(GameMode.CREATIVE);
+                p.sendMessage("§8 ■ §7You are now in §f§lCREATIVE§7 mode.");
+                break;
+            case "adventure":
+            case "a":
+            case "2":
+                p.setGameMode(GameMode.ADVENTURE);
+                p.sendMessage("§8 ■ §7You are now in §f§lADVENTURE§7 mode.");
+                break;
+            case "spectator":
+            case "sp":
+            case "3":
+                p.setGameMode(GameMode.SPECTATOR);
+                p.sendMessage("§8 ■ §7You are now in §f§lSPECTATOR§7 mode.");
+                break;
+            default:
+                p.sendMessage("§4 ■ §cInvalid gamemode, please provide one of the following gamemodes: §4survival§c, §4creative§c, §4adventure§c, §4spectator§c.");
+                break;
+        }
+    }
+
+    private String getGamemodeName(String mode) {
+        switch (mode.toLowerCase()) {
+            case "survival":
+            case "s":
+            case "0":
+                return "SURVIVAL";
+            case "creative":
+            case "c":
+            case "1":
+                return "CREATIVE";
+            case "adventure":
+            case "a":
+            case "2":
+                return "ADVENTURE";
+            case "spectator":
+            case "sp":
+            case "3":
+                return "SPECTATOR";
+            default:
+                return "UNKNOWN";
+        }
+    }
+}
+
+```
