@@ -7,10 +7,21 @@ import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AriaDocs - Template",
-  metadataBase: new URL("https://ariadocs.vercel.app/"),
-  description:
-    "This comprehensive documentation template, crafted with Next.js and available as open-source, delivers a sleek and responsive design, tailored to meet all your project documentation requirements.",
+  title: "MarieTeam - Spectron Labs",
+  description: "Your marine transportation company. Book your dream vacation with ease.",
+  openGraph: {
+    url: "https://marieteam.vercel.app",
+    title: "MarieTeam Docs",
+    description: "Your marine transportation company. Book your dream vacation with ease.",
+    images: [
+      {
+        url: "https://marieteam.vercel.app/og.png",
+        width: 1200,
+        height: 630,
+        alt: "MarieTeam",
+      },
+    ],
+  }
 };
 
 export default function RootLayout({
@@ -24,19 +35,19 @@ export default function RootLayout({
         className={`${GeistSans.variable} ${GeistMono.variable} font-regular antialiased`}
         suppressHydrationWarning
       >
-        <ThemeProvider
+      <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-        >
-          <SiteHeader />
-          <main className="sm:container mx-auto w-[90vw] h-auto">
-            {children}
-          </main>
-          <SiteFooter />
-        </ThemeProvider>
+      >
+        <div className="flex flex-col min-h-screen">
+          <SiteHeader/>
+          {children}
+          <SiteFooter/>
+        </div>
+      </ThemeProvider>
       </body>
     </html>
-  );
+);
 }

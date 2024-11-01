@@ -4,7 +4,7 @@ import {cn} from "@/lib/utils";
 
 export default function NotFound() {
   return (
-      <main className="flex-grow flex items-center justify-center h-screen ">
+      <main className="flex-grow flex items-center justify-center">
           <div className="container mx-auto px-4">
               <div className="max-w-md mx-auto text-center">
                   <div className="text-sm mb-4">404</div>
